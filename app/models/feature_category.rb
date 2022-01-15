@@ -1,3 +1,3 @@
 class FeatureCategory < ApplicationRecord
-  type: ["epic", "change_request"]
+  enum category_type: [:epic, :change_request]
 end
