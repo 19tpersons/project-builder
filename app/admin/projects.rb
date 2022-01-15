@@ -5,7 +5,11 @@ ActiveAdmin.register Project do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :start_date, :name, :product_owner, :contingency
+  permit_params :start_date,
+    :name,
+    :product_owner,
+    :contingency,
+    feature_categories_attributes: [:id, :name, :type, :category_type]
   #
   # or
   #
@@ -33,7 +37,11 @@ ActiveAdmin.register Project do
       f.has_many :feature_categories,
                  new_record: 'New Epic/Change Request',
                  remove_record: 'Remove Epic/Change Reuest',
-                 allow_destroy: true
+                 allow_destroy: true do | ff |
+        ff.input :name
+        ff.input :type
+        ff.input :category_type
+      end
     end
 
 
