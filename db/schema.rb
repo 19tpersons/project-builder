@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_15_000354) do
+ActiveRecord::Schema.define(version: 2022_01_15_204158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(version: 2022_01_15_000354) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
   end
 
+  create_table "activities", force: :cascade do |t|
+    t.bigint "role_id", null: false
+    t.string "name"
+    t.float "estimated_amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["role_id"], name: "index_activities_on_role_id"
+  end
+
   create_table "admin_users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -41,4 +50,57 @@ ActiveRecord::Schema.define(version: 2022_01_15_000354) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "employees", force: :cascade do |t|
+    t.bigint "role_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["role_id"], name: "index_employees_on_role_id"
+  end
+
+  create_table "feature_categories", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.string "name"
+    t.integer "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_feature_categories_on_project_id"
+  end
+
+  create_table "features", force: :cascade do |t|
+    t.bigint "feature_category_id", null: false
+    t.float "estimate"
+    t.integer "status"
+    t.float "current_hours"
+    t.string "name"
+    t.integer "trello_card"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["feature_category_id"], name: "index_features_on_feature_category_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.datetime "start_date"
+    t.string "name"
+    t.string "product_owner"
+    t.float "contingency"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.float "cost_per_hour"
+    t.integer "velocity"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_roles_on_project_id"
+  end
+
+  add_foreign_key "activities", "roles"
+  add_foreign_key "employees", "roles"
+  add_foreign_key "feature_categories", "projects"
+  add_foreign_key "features", "feature_categories"
+  add_foreign_key "roles", "projects"
 end
