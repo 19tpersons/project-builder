@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_15_204158) do
+ActiveRecord::Schema.define(version: 2022_01_16_001439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 2022_01_15_204158) do
   create_table "feature_categories", force: :cascade do |t|
     t.bigint "project_id", null: false
     t.string "name"
-    t.integer "type"
+    t.integer "category_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["project_id"], name: "index_feature_categories_on_project_id"
@@ -79,6 +79,15 @@ ActiveRecord::Schema.define(version: 2022_01_15_204158) do
     t.index ["feature_category_id"], name: "index_features_on_feature_category_id"
   end
 
+  create_table "project_roles", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "role_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_project_roles_on_project_id"
+    t.index ["role_id"], name: "index_project_roles_on_role_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.datetime "start_date"
     t.string "name"
@@ -89,18 +98,17 @@ ActiveRecord::Schema.define(version: 2022_01_15_204158) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.bigint "project_id", null: false
     t.float "cost_per_hour"
     t.integer "velocity"
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["project_id"], name: "index_roles_on_project_id"
   end
 
   add_foreign_key "activities", "roles"
   add_foreign_key "employees", "roles"
   add_foreign_key "feature_categories", "projects"
   add_foreign_key "features", "feature_categories"
-  add_foreign_key "roles", "projects"
+  add_foreign_key "project_roles", "projects"
+  add_foreign_key "project_roles", "roles"
 end

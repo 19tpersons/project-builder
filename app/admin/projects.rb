@@ -1,23 +1,11 @@
 ActiveAdmin.register Project do
-
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
   permit_params :start_date,
     :name,
     :product_owner,
     :contingency,
-    feature_categories_attributes: [:id, :name, :type, :category_type]
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:start_date, :name, :product_owner, :contingency]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+    role_ids: [],
+    feature_categories_attributes: [:id, :name, :category_type]
+
   
 
   form do |f|
@@ -25,13 +13,13 @@ ActiveAdmin.register Project do
       f.input :name
       f.input :product_owner
       f.input :contingency
+      f.input :start_date, as: :datepicker,
+        datepicker_options: {
+          min_date: "2013-10-8",
+          max_date: "+3D"
+        }
+      f.input :role_ids, as: :check_boxes, collection: Role.all
     end
-
-    f.input :start_date, as: :datepicker,
-    datepicker_options: {
-      min_date: "2013-10-8",
-      max_date: "+3D"
-    }
 
     f.inputs do
       f.has_many :feature_categories,
@@ -39,7 +27,6 @@ ActiveAdmin.register Project do
                  remove_record: 'Remove Epic/Change Reuest',
                  allow_destroy: true do | ff |
         ff.input :name
-        ff.input :type
         ff.input :category_type
       end
     end

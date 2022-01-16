@@ -1,18 +1,30 @@
 ActiveAdmin.register Role do
 
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-   permit_params :project_id, :cost_per_hour, :velocity, :name
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:project_id, :cost_per_hour, :velocity, :name]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
-  
+  permit_params :cost_per_hour,
+    :velocity,
+    :name,
+    project_ids: [],
+    activities_attributes: [:id, :name, :estimated_amount]
+
+ 
+  form do |f|
+    f.inputs do
+      f.input :cost_per_hour
+      f.input :velocity
+      f.input :name
+      f.input :project_ids, as: :check_boxes, collection: Project.all
+    end
+    
+    f.inputs do
+      f.has_many :activities,
+                 new_record: 'New Activity',
+                 remove_record: 'Remove Activity',
+                 allow_destroy: true do | ff |
+        ff.input :name
+        ff.input :estimated_amount
+      end
+    end
+
+    f.actions
+  end
 end
