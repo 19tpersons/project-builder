@@ -25,4 +25,25 @@ ActiveAdmin.register Role do
 
     f.actions
   end
+
+  show do | page |
+    attributes_table do
+      row :name
+      row :cost_per_hour
+      row :velocity
+      row :created_at
+      row :updated_at
+    end
+
+    panel "Activities" do
+      table_for page.activities do 
+        column :name do | activity |
+          link_to activity.name, edit_admin_activity_path
+        end
+        column :estimated_amount
+      end
+    end
+    
+    active_admin_comments
+  end
 end
