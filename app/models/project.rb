@@ -1,5 +1,6 @@
 class Project < ApplicationRecord
   has_many :feature_categories
+  has_many :features, through: :feature_categories
   has_many :project_employees
   has_many :employees, through: :project_employees
 

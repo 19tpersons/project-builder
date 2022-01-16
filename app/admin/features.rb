@@ -1,4 +1,7 @@
 ActiveAdmin.register Feature do
+  #Hide index page from main menu
+  menu false
+
    permit_params :feature_category_id, :estimate, :status, :current_hours, :name, :trello_card
 
    form do |f|

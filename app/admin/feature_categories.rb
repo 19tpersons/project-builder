@@ -1,7 +1,6 @@
 ActiveAdmin.register FeatureCategory do
-
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
+  #Change Menu Label
+  menu label: "Epics/CRs"
 
   permit_params :project_id, 
     :name, 
@@ -27,6 +26,29 @@ ActiveAdmin.register FeatureCategory do
     end
 
     f.actions
+  end
+
+  show do | page |
+    attributes_table do
+      row :project
+      row :name
+      row :category_type
+      row :created_at
+      row :updated_at
+    end
+
+    panel "Features" do
+      table_for page.features do 
+        column :name do | feature |
+          link_to feature.name, edit_admin_feature_path
+        end
+        column :estimate
+        column :current_hours
+        column :trello_card
+      end
+    end
+    
+    active_admin_comments
   end
   
 end
