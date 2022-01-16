@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_16_001439) do
+ActiveRecord::Schema.define(version: 2022_01_16_025645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,12 +50,19 @@ ActiveRecord::Schema.define(version: 2022_01_16_001439) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "employees", force: :cascade do |t|
+  create_table "employee_roles", force: :cascade do |t|
     t.bigint "role_id", null: false
+    t.bigint "employee_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id"], name: "index_employee_roles_on_employee_id"
+    t.index ["role_id"], name: "index_employee_roles_on_role_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["role_id"], name: "index_employees_on_role_id"
   end
 
   create_table "feature_categories", force: :cascade do |t|
@@ -79,13 +86,13 @@ ActiveRecord::Schema.define(version: 2022_01_16_001439) do
     t.index ["feature_category_id"], name: "index_features_on_feature_category_id"
   end
 
-  create_table "project_roles", force: :cascade do |t|
+  create_table "project_employees", force: :cascade do |t|
     t.bigint "project_id", null: false
-    t.bigint "role_id", null: false
+    t.bigint "employee_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["project_id"], name: "index_project_roles_on_project_id"
-    t.index ["role_id"], name: "index_project_roles_on_role_id"
+    t.index ["employee_id"], name: "index_project_employees_on_employee_id"
+    t.index ["project_id"], name: "index_project_employees_on_project_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -106,9 +113,10 @@ ActiveRecord::Schema.define(version: 2022_01_16_001439) do
   end
 
   add_foreign_key "activities", "roles"
-  add_foreign_key "employees", "roles"
+  add_foreign_key "employee_roles", "employees"
+  add_foreign_key "employee_roles", "roles"
   add_foreign_key "feature_categories", "projects"
   add_foreign_key "features", "feature_categories"
-  add_foreign_key "project_roles", "projects"
-  add_foreign_key "project_roles", "roles"
+  add_foreign_key "project_employees", "employees"
+  add_foreign_key "project_employees", "projects"
 end

@@ -3,7 +3,6 @@ ActiveAdmin.register Role do
   permit_params :cost_per_hour,
     :velocity,
     :name,
-    project_ids: [],
     activities_attributes: [:id, :name, :estimated_amount]
 
  
@@ -12,7 +11,6 @@ ActiveAdmin.register Role do
       f.input :cost_per_hour
       f.input :velocity
       f.input :name
-      f.input :project_ids, as: :check_boxes, collection: Project.all
     end
     
     f.inputs do

@@ -3,7 +3,7 @@ ActiveAdmin.register Project do
     :name,
     :product_owner,
     :contingency,
-    role_ids: [],
+    employee_ids: [],
     feature_categories_attributes: [:id, :name, :category_type]
 
   
@@ -18,7 +18,7 @@ ActiveAdmin.register Project do
           min_date: "2013-10-8",
           max_date: "+3D"
         }
-      f.input :role_ids, as: :check_boxes, collection: Role.all
+      f.input :employee_ids, as: :check_boxes, collection: Employee.all
     end
 
     f.inputs do
