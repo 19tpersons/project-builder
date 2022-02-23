@@ -1,24 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application is a simple build of an internal finance tool used at a small web application development company named Codelation. The finance tool keeps track of different project spenditures, finds their planned end date, and generates reports based off of those statistics.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The current build of this application only stores data (manipulated via ActiveAdmin) and displays a simple page with a project's statistics.
