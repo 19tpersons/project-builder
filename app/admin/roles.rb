@@ -3,6 +3,8 @@ ActiveAdmin.register Role do
   permit_params :cost_per_hour,
     :velocity,
     :name,
+    :employee_id,
+    :project_id,
     activities_attributes: [:id, :name, :estimated_amount]
 
  
@@ -11,6 +13,8 @@ ActiveAdmin.register Role do
       f.input :cost_per_hour
       f.input :velocity
       f.input :name
+      f.input :employee_id, as: :select, collection: Employee.select(:name, :id), selected: f.object.employee_id
+      f.input :project_id, as: :select, collection: Project.select(:name, :id), selected: f.object.project_id
     end
     
     f.inputs do

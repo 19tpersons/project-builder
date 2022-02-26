@@ -3,7 +3,6 @@ ActiveAdmin.register Project do
     :name,
     :product_owner,
     :contingency,
-    employee_ids: [],
     feature_categories_attributes: [:id, :name, :category_type]
 
   form do |f|
@@ -16,7 +15,6 @@ ActiveAdmin.register Project do
           min_date: "2013-10-8",
           max_date: "+3D"
         }
-      f.input :employee_ids, as: :check_boxes, collection: Employee.all
     end
 
     f.inputs "Epics/Change Requests" do

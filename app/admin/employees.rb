@@ -1,6 +1,6 @@
 ActiveAdmin.register Employee do
-  permit_params :name,
-    role_ids: []
+  permit_params :name
+    #role_ids: []
   
   form do |f|
     f.inputs do
@@ -19,16 +19,17 @@ ActiveAdmin.register Employee do
       row :updated_at
     end
 
-    panel "Activities" do
-      table_for page.roles do 
-        column :name do | role |
-          link_to role.name, edit_admin_activity_path
-        end
-        column :estimated_amount
-        column :cost_per_hour
-        column :velocity
-      end
-    end
+    #panel "Activities" do
+    # table_for page.roles do 
+    #     column :name do | role |
+    #       link_to role.name, edit_admin_activity_path
+    #     end
+    #     column :estimated_hours_amount
+    #     column :estimated_percentage_amount
+    #     column :cost_per_hour
+    #     column :velocity
+    #   end
+    # end
     
     active_admin_comments
   end
