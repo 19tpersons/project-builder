@@ -5,7 +5,7 @@ ActiveAdmin.register Role do
     :name,
     :employee_id,
     :project_id,
-    activities_attributes: [:id, :name, :estimated_amount]
+    activities_attributes: [:id, :name, :estimated_hours_amount, estimated_percentage_amount]
 
  
   form do |f|
@@ -13,13 +13,19 @@ ActiveAdmin.register Role do
       f.input :cost_per_hour
       f.input :velocity
       f.input :name
-      f.input :employee_id, as: :select, collection: Employee.select(:name, :id), selected: f.object.employee_id
-      f.input :project_id, as: :select, collection: Project.select(:name, :id), selected: f.object.project_id
+      f.input :employee_id,
+        as: :select, 
+        collection: Employee.select(:name, :id), 
+        selected: f.object.employee_id
+      f.input :project_id, 
+        as: :select, 
+        collection: Project.select(:name, :id), 
+        selected: f.object.project_id ? f.object.project_id : params[:project_id]
     end
     
     f.inputs do
       f.has_many :activities,
-                 new_record: 'New Activity',
+                 new_record: 'New Activity',  
                  remove_record: 'Remove Activity',
                  allow_destroy: true do | ff |
         ff.input :name

@@ -40,9 +40,13 @@ ActiveAdmin.register Project do
     end
 
     panel "Employees" do
-      table_for page.employees do 
-        column :name do | employees |
-          link_to employees.name, edit_admin_feature_path
+      a "Add Employee/Role to Project", href: new_admin_role_path(project_id: 1)
+      table_for page.roles do
+        column :name do | role |
+          link_to role.employee.name, edit_admin_feature_path
+        end
+        column :role do | role |
+          link_to role.name, edit_admin_role_path
         end
       end
     end
