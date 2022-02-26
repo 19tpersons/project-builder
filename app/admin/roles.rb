@@ -19,7 +19,8 @@ ActiveAdmin.register Role do
                  remove_record: 'Remove Activity',
                  allow_destroy: true do | ff |
         ff.input :name
-        ff.input :estimated_amount
+        ff.input :estimated_hours_amount
+        ff.input :estimated_percentage_amount
       end
     end
 
@@ -40,7 +41,8 @@ ActiveAdmin.register Role do
         column :name do | activity |
           link_to activity.name, edit_admin_activity_path
         end
-        column :estimated_amount
+        column :estimated_hours_amount
+        column :estimated_percentage_amount
       end
     end
     

@@ -5,7 +5,7 @@ ActiveAdmin.register Employee do
   form do |f|
     f.inputs do
       f.input :name
-      f.input :role_ids, as: :check_boxes, collection: Role.all
+      #f.input :role_ids, as: :check_boxes, collection: Role.all
     end
 
     f.actions
