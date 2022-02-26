@@ -5,7 +5,7 @@ ActiveAdmin.register Role do
     :name,
     :employee_id,
     :project_id,
-    activities_attributes: [:id, :name, :estimated_hours_amount, estimated_percentage_amount]
+    activities_attributes: [:id, :name, :estimated_hours_amount, :estimated_percentage_amount]
 
  
   form do |f|
