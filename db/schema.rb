@@ -51,15 +51,6 @@ ActiveRecord::Schema.define(version: 2022_02_26_203555) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "employee_roles", force: :cascade do |t|
-    t.bigint "role_id", null: false
-    t.bigint "employee_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["employee_id"], name: "index_employee_roles_on_employee_id"
-    t.index ["role_id"], name: "index_employee_roles_on_role_id"
-  end
-
   create_table "employees", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -103,13 +94,14 @@ ActiveRecord::Schema.define(version: 2022_02_26_203555) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "project_id"
+    t.bigint "employee_id"
+    t.index ["employee_id"], name: "index_roles_on_employee_id"
     t.index ["project_id"], name: "index_roles_on_project_id"
   end
 
   add_foreign_key "activities", "roles"
-  add_foreign_key "employee_roles", "employees"
-  add_foreign_key "employee_roles", "roles"
   add_foreign_key "feature_categories", "projects"
   add_foreign_key "features", "feature_categories"
+  add_foreign_key "roles", "employees"
   add_foreign_key "roles", "projects"
 end
