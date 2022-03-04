@@ -21,6 +21,7 @@ ActiveAdmin.register FeatureCategory do
         ff.input :name
         ff.input :estimate
         ff.input :current_hours
+        ff.input :status
         ff.input :trello_card
       end
     end
@@ -44,6 +45,7 @@ ActiveAdmin.register FeatureCategory do
         end
         column :estimate
         column :current_hours
+        column :status
         column :trello_card
       end
     end

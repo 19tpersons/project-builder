@@ -70,6 +70,7 @@ ActiveAdmin.register Project do
         end
         column :estimate
         column :current_hours
+        column :status
         column :trello_card
       end
     end

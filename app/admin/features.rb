@@ -10,6 +10,7 @@ ActiveAdmin.register Feature do
       f.input :name
       f.input :estimate
       f.input :current_hours
+      f.input :status
       f.input :trello_card
     end
 
