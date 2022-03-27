@@ -6,8 +6,21 @@ class Project < ApplicationRecord
 
   accepts_nested_attributes_for :feature_categories, :allow_destroy => true
 
+  #scope :developers, -> { roles.where(role: :developer)&.employees }
+
   def test
     byebug
   end
-  #accepts_nested_attributes_for :roles, :allow_destroy => true
+
+  def budgetted_cost
+    estimated_hours = features.sum(:estimate)
+  end
+
+  def actual_cost
+    actual_hours = features.sum(:current_hours)
+  end
+
+  def developer_blended_rate
+
+  end
 end
