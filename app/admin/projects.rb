@@ -46,7 +46,7 @@ ActiveAdmin.register Project do
           link_to role.employee.name, edit_admin_feature_path
         end
         column :role do | role |
-          link_to role.name, edit_admin_role_path
+          link_to role.role_type, edit_admin_role_path
         end
       end
     end

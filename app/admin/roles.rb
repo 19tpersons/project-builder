@@ -2,19 +2,17 @@ ActiveAdmin.register Role do
 
   permit_params :cost_per_hour,
     :velocity,
-    :name,
     :employee_id,
     :project_id,
-    :role,
+    :role_type,
     activities_attributes: [:id, :name, :estimated_hours_amount, :estimated_percentage_amount]
 
  
   form do |f|
     f.inputs do
+      f.input :role_type
       f.input :cost_per_hour
       f.input :velocity
-      f.input :name
-      f.input :role_type
       f.input :employee_id,
         as: :select, 
         collection: Employee.select(:name, :id), 
@@ -41,7 +39,7 @@ ActiveAdmin.register Role do
 
   show do | page |
     attributes_table do
-      row :name
+      row :role_type
       row :cost_per_hour
       row :velocity
       row :created_at
