@@ -7,9 +7,11 @@ class Project < ApplicationRecord
   accepts_nested_attributes_for :feature_categories, :allow_destroy => true
 
 
-  def test
-    #Roles::Developer()
-    byebug
+  def project_roles
+    project_roles = []
+    roles.each do | role |
+      #Get project_role and add to list.
+    end
   end
 
   def budgetted_developer_cost
