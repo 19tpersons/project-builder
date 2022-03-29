@@ -1,4 +1,4 @@
-module Role 
+module Projects
   class Activity
     attr_accessor :hours, :rate
 
