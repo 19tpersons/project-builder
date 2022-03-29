@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 2022_03_26_202909) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "project_id"
     t.bigint "employee_id"
-    t.integer "role"
+    t.integer "role_type"
     t.index ["employee_id"], name: "index_roles_on_employee_id"
     t.index ["project_id"], name: "index_roles_on_project_id"
   end

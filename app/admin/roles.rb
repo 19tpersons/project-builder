@@ -5,6 +5,7 @@ ActiveAdmin.register Role do
     :name,
     :employee_id,
     :project_id,
+    :role,
     activities_attributes: [:id, :name, :estimated_hours_amount, :estimated_percentage_amount]
 
  
@@ -13,6 +14,7 @@ ActiveAdmin.register Role do
       f.input :cost_per_hour
       f.input :velocity
       f.input :name
+      f.input :role_type
       f.input :employee_id,
         as: :select, 
         collection: Employee.select(:name, :id), 
