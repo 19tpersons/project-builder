@@ -28,4 +28,9 @@ class Project < ApplicationRecord
 
     return total_hourly_cost / roles.developer.count
   end
+
+  def developer_weekly_velocity
+      total_daily_velocity = roles.developer.sum(:velocity)
+     return 37 * total_daily_velocity / 8 #40 hours - 3 pto
+  end
 end
